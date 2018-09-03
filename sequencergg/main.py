@@ -27,6 +27,6 @@ while True:
             break
         if note_to_play:
             speaker.note("{}{}".format(note_to_play, 3))
-            utime.sleep(500)
+            utime.sleep_ms(500)
 
 restart_to_default()
