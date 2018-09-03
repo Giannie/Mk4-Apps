@@ -1,5 +1,5 @@
 """Sequencer
-Fixed button ref
+Fixed button ref 0.2
 """
 
 ___name___         = "Sequencer"
