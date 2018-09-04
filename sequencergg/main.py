@@ -37,9 +37,9 @@ try:
                         speaker.stop()
                         alive = False
                     if is_triggered(Buttons.JOY_Up):
-                        BPM += 1
+                        bpm += 1
                     if is_triggered(Buttons.JOY_Down):
-                        BPM -= 1
+                        bpm -= 1
                     if is_triggered(Buttons.BTN_A):
                         speaker.stop()
                     sleep.wfi()
