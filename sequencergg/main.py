@@ -33,25 +33,25 @@ try:
             for note_to_play in sequence:
                 if note_to_play:
                     speaker.note("{}{}".format(note_to_play, 3))
-                    end_time = time.ticks_ms() + int(60/bpm*1000/4)
-                    while time.ticks_ms() < end_time:
-                        if is_triggered(Buttons.BTN_Menu):
-                            speaker.stop()
-                            alive = False
-                            break
-                        if is_triggered(Buttons.JOY_Up):
-                            bpm += 1
-                            render_ui()
-                        if is_triggered(Buttons.JOY_Down):
-                            bpm -= 1
-                            render_ui()
-                        if is_triggered(Buttons.BTN_B):
-                            speaker.stop()
-                            play = False
-                            break
-                        sleep.wfi()
-                    if not play:
+                end_time = time.ticks_ms() + int(60/bpm*1000/4)
+                while time.ticks_ms() < end_time:
+                    if is_triggered(Buttons.BTN_Menu):
+                        speaker.stop()
+                        alive = False
                         break
+                    if is_triggered(Buttons.JOY_Up):
+                        bpm += 1
+                        render_ui()
+                    if is_triggered(Buttons.JOY_Down):
+                        bpm -= 1
+                        render_ui()
+                    if is_triggered(Buttons.BTN_B):
+                        speaker.stop()
+                        play = False
+                        break
+                    sleep.wfi()
+                if not play:
+                    break
         if is_triggered(Buttons.BTN_A):
             play = True
         if is_triggered(Buttons.BTN_Menu):
