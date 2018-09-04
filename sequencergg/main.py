@@ -46,4 +46,5 @@ try:
 
     restart_to_default()
 except Exception as e:
+    speaker.stop()
     print(repr(e))
