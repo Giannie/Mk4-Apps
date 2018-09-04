@@ -15,7 +15,7 @@ try:
     import utime
 
 
-    sequence = ["C","","D","","E","","F","","G","","A","","B","","C"]
+    sequence = ["C","","D","","E","F","G","F","G","A","B","A","B","A","B"]
     bpm = 120
 
     def render_ui():
@@ -50,8 +50,12 @@ try:
                             play = False
                             break
                         sleep.wfi()
+                    if not play:
+                        break
         if is_triggered(Buttons.BTN_A):
             play = True
+        if is_triggered(Buttons.BTN_Menu):
+            alive = False
         sleep.wfi()
     print("exiting")
     restart_to_default()
