@@ -36,14 +36,17 @@ try:
                     if is_triggered(Buttons.BTN_Menu):
                         speaker.stop()
                         alive = False
+                        break
                     if is_triggered(Buttons.JOY_Up):
                         bpm += 1
+                        render_ui()
                     if is_triggered(Buttons.JOY_Down):
                         bpm -= 1
+                        render_ui()
                     if is_triggered(Buttons.BTN_A):
                         speaker.stop()
                     sleep.wfi()
-
+    print("exiting")
     restart_to_default()
 except Exception as e:
     speaker.stop()
