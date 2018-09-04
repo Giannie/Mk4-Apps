@@ -1,5 +1,5 @@
 """Sequencer
-v0.3
+v0.4
 """
 
 ___name___         = "Sequencer"
@@ -8,7 +8,7 @@ ___categories___   = ["Sound"]
 ___dependencies___ = ["speaker", "buttons", "ugfx_helper", "app"]
 
 try:
-    import ugfx, speaker, ugfx_helper
+    import ugfx, speaker, ugfx_helper, sleep, time
     from tilda import Buttons
     from buttons import *
     from app import restart_to_default
@@ -26,22 +26,24 @@ try:
     render_ui()
 
     choice = ""
-
-    while True:
-        render_ui()
+    alive = True
+    while alive:
         for note_to_play in sequence:
-            if is_pressed(Buttons.BTN_Menu):
-                speaker.stop()
-                choice = "home_default"
-                break
-            if is_pressed(Buttons.BTN_A):
-                speaker.stop()
-                choice = "mass_storage"
             if note_to_play:
                 speaker.note("{}{}".format(note_to_play, 3))
-                utime.sleep_ms(500)
+                end_time = time.ticks_ms() + int(60/bpm*1000)
+                while time.ticks_ms() < end_time:
+                    if is_triggered(Buttons.BTN_Menu):
+                        speaker.stop()
+                        alive = False
+                    if is_triggered(Buttons.JOY_Up):
+                        BPM += 1
+                    if is_triggered(Buttons.JOY_Down):
+                        BPM -= 1
+                    if is_triggered(Buttons.BTN_A):
+                        speaker.stop()
+                    sleep.wfi()
 
     restart_to_default()
 except Exception as e:
-    print(str(e))
-    exec(open("home_default/main.py").read())
+    print(repr(e))
